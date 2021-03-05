@@ -2,6 +2,11 @@ package problem;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
+import java.util.ArrayList;
+
+import static problem.Problem.GRID;
+import static problem.Problem.dSize;
+
 public class Quad {
     //точки вершин
     Point p1,p2,p3,p4;
@@ -11,6 +16,9 @@ public class Quad {
 
     //прямые, задающие прямоугольник
     Line line1, line2, line3, line4;
+
+    //список точек внутри
+    ArrayList<Point> pointsInside = new ArrayList<Point>();
 
 
     Quad(Point p1, Point p2, Point pA) {
@@ -55,9 +63,14 @@ public class Quad {
         }
 
         return p.compareTo(lineDown1) > 0 && p.compareTo(lineDown2) > 0 && p.compareTo(lineUp1) < 0 && p.compareTo(lineUp2) < 0;
+    }
 
-
-
+    public void fill_listInside(){
+        for (int i = 0; i < 4*dSize*dSize + 4*dSize + 1; i++) {
+            if(isInside(GRID.get(i))){
+                pointsInside.add(GRID.get(i));
+            }
+        }
     }
 
     //Рисование точки через класс Figures
@@ -65,7 +78,8 @@ public class Quad {
         Figures.renderQuad(gl,p1,p2,p3,p4,color,filled);
     }
 
-    //Получить строковое представление точки
+    //облегчённый метод рисования
+    void render(GL2 gl){render(gl,new Color(255,255,255), false);}
 
 
 

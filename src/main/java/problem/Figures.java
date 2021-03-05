@@ -6,8 +6,6 @@ import static javax.media.opengl.GL.*;
 
 public class Figures{
 
-    public static final double decartSize = 20;
-
     public static void renderPoint(GL2 gl, Point p, double W, Color color){
         double
                 r=color.R/255,
@@ -15,7 +13,7 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
-        double x = p.x/decartSize, y = p.y/decartSize; //делаем нормальные координаты
+        double x = p.x/ Problem.dSize, y = p.y/ Problem.dSize; //делаем нормальные координаты
 
 
         gl.glPointSize((float) W);
@@ -31,8 +29,8 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
-        double x1 = p1.x/decartSize, y1 = p1.y/decartSize;
-        double x2 = p2.x/decartSize, y2 = p2.y/decartSize;
+        double x1 = p1.x/ Problem.dSize, y1 = p1.y/ Problem.dSize;
+        double x2 = p2.x/ Problem.dSize, y2 = p2.y/ Problem.dSize;
         //делаем нормальные координаты
 
 
@@ -50,9 +48,9 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
-        double x1 = p1.x/decartSize, y1 = p1.y/decartSize;
-        double x2 = p2.x/decartSize, y2 = p2.y/decartSize;
-        double x3 = p3.x/decartSize, y3 = p3.y/decartSize;
+        double x1 = p1.x/ Problem.dSize, y1 = p1.y/ Problem.dSize;
+        double x2 = p2.x/ Problem.dSize, y2 = p2.y/ Problem.dSize;
+        double x3 = p3.x/ Problem.dSize, y3 = p3.y/ Problem.dSize;
         //делаем нормальные координаты
         if(!filled){
         gl.glBegin(GL_LINE_STRIP);
@@ -77,10 +75,10 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
-        double x1 = p1.x/decartSize, y1 = p1.y/decartSize;
-        double x2 = p2.x/decartSize, y2 = p2.y/decartSize;
-        double x3 = p3.x/decartSize, y3 = p3.y/decartSize;
-        double x4 = p4.x/decartSize, y4 = p4.y/decartSize;
+        double x1 = p1.x/ Problem.dSize, y1 = p1.y/ Problem.dSize;
+        double x2 = p2.x/ Problem.dSize, y2 = p2.y/ Problem.dSize;
+        double x3 = p3.x/ Problem.dSize, y3 = p3.y/ Problem.dSize;
+        double x4 = p4.x/ Problem.dSize, y4 = p4.y/ Problem.dSize;
         //делаем нормальные координаты
         if(!filled){
             gl.glBegin(GL_LINE_STRIP);
@@ -107,9 +105,9 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
-        double radius = R/decartSize; //выровняем радиус
+        double radius = R/ Problem.dSize; //выровняем радиус
 
-        double x0 = p.x/decartSize, y0 = p.y/decartSize;
+        double x0 = p.x/ Problem.dSize, y0 = p.y/ Problem.dSize;
         //делаем нормальные координаты
 
         double delta = 50; //шаг прорисовки окружности

@@ -36,6 +36,9 @@ public class Point implements Comparable<Line> {
         Figures.renderPoint(gl,this, W, color);
     }
 
+    //облегчённый метод рисования
+    void render(GL2 gl){render(gl,2,new Color(255,255,255));}
+
     //Получить строковое представление точки
     @Override
     public String toString() {

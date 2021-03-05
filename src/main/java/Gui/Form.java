@@ -76,13 +76,14 @@ public class Form extends JFrame {
             }
         });
         timer.start();
-        initWidgets();
+        renderer.problem.solve();
+        //initWidgets();
     }
 
     /**
      * Инициализация виджетов
      */
-    private void initWidgets() {
+  /*  private void initWidgets() {
         // задаём текст полю описания задачи
         problemText.setText("<html>" + Problem.PROBLEM_TEXT.replaceAll("\n", "<br>"));
         // делаем первое радио выбранным
@@ -122,7 +123,7 @@ public class Form extends JFrame {
                 renderer.problem.solve();
             }
         });
-    }
+    }*/
 
     /**
      * Событие таймера
