@@ -62,7 +62,7 @@ public class Quad {
             lineDown2 = line4;
         }
 
-        return p.compareTo(lineDown1) > 0 && p.compareTo(lineDown2) > 0 && p.compareTo(lineUp1) < 0 && p.compareTo(lineUp2) < 0;
+        return p.compareTo(lineDown1) >= 0 && p.compareTo(lineDown2) >= 0 && p.compareTo(lineUp1) <= 0 && p.compareTo(lineUp2) <= 0;
     }
 
     public void fill_listInside(){

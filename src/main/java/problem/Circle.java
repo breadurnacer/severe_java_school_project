@@ -38,6 +38,15 @@ public class Circle {
         }
     }
 
+    //метод пересечения списков точек через retainall
+    public int IntersectionArea(Quad quad){
+        int result;
+        ArrayList<Point> points = this.pointsInside;
+        points.retainAll(quad.pointsInside);
+        result = points.size();
+        return result;
+    }
+
     //Рисование точки через класс Figures
     void render(GL2 gl, Color color, boolean filled) {
         Figures.renderCircle(gl,p0,R,color,filled);

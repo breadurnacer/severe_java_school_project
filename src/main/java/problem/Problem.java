@@ -26,7 +26,7 @@ public class Problem {
     //список заданных прямоугольников
     public ArrayList<Quad> QuadsList = new ArrayList<Quad>();
     //список заданных окружностей
-    public ArrayList<Circle> CriclesList = new ArrayList<Circle>();
+    public ArrayList<Circle> CirclesList = new ArrayList<Circle>();
 
 
     //список всех точек на заданной плоскости (сетка)
@@ -34,11 +34,14 @@ public class Problem {
 
     //i - сверху вниз
     //q - слева направо
-
+    //accuracy - точность от 0 до 1. 1 - наихудшая точность. -> 0 - наилушая
+    public static double accuracy = 0.5;
+    public static double np = 1/accuracy;
     public static void fill_GRID() {
-        for (double i = dSize; i >= -dSize; i--) {
+        for (double i = dSize; i >= -dSize; i-=accuracy) {
 
-            for (double q = -dSize; q <= dSize; q++) {
+            for (double q = -dSize; q <= dSize; q+=accuracy) {
+               // System.out.println(i+" "+q);
                 GRID.add(new Point(q, i));
             }
 
@@ -48,6 +51,33 @@ public class Problem {
     //Решить задачу
     public void solve() {
         fill_GRID();
+
+        //CirclesList.add(new Circle(new Point(5, 3), new Point(6, 4)));
+        CirclesList.add(new Circle(new Point(0, -6), new Point(0, -1)));
+        //CirclesList.add(new Circle(new Point(-11, -11), new Point(-11, -8)));
+        //CirclesList.add(new Circle(new Point(10, 3), new Point(0, 4)));
+
+        //QuadsList.add(new Quad(new Point(3, 4), new Point(5, -2), new Point(9, 3)));
+        QuadsList.add(new Quad(new Point(-1, -3), new Point(-3, -4), new Point(2, 7)));
+        //QuadsList.add(new Quad(new Point(-10, -11), new Point(-5, 12), new Point(-11, 6)));
+
+
+
+        for (Circle c: CirclesList) {
+            c.fill_listInside();
+            System.out.println(c.pointsInside.size());
+        }
+        System.out.println();
+        for (Quad q: QuadsList) {
+            q.fill_listInside();
+            System.out.println(q.pointsInside.size());
+        }
+        System.out.println();
+        for (Circle c: CirclesList) {
+            for (Quad q: QuadsList) {
+                System.out.println(c.IntersectionArea(q));
+            }
+        }
 
     }
 
@@ -68,38 +98,29 @@ public class Problem {
 
     public void render(GL2 gl) {
 
+
+
+
+        for (Quad q: QuadsList) {
+            q.render(gl);
+       }
+
+
+        for (Circle c: CirclesList) {
+            c.render(gl);
+        }
+
         //данные для дебага
         Point p = new Point(3.1, 4);
         Point p1 = new Point(6, 3);
 
         Color white = new Color(255, 255, 255);
-        //нарисовать координатные оси
-        Point LEFTX = new Point(-20, 0),
-                RIGHTX = new Point(20, 0),
-                UPY = new Point(0, 20),
-                DOWNY = new Point(0, -20);
-        Figures.renderLine(gl, LEFTX, RIGHTX, 2, new Color(255, 255, 255));
-        Figures.renderLine(gl, UPY, DOWNY, 2, new Color(255, 255, 255));
-        Figures.renderTriangle(gl, new Point(19, 1), new Point(20, 0), new Point(19, -1), new Color(255, 255, 255), true);
-        Figures.renderTriangle(gl, new Point(1, 19), new Point(0, 20), new Point(-1, 19), new Color(255, 255, 255), true);
-        //нарисовать координатные оси
+        Figures.renderDecart(gl);
 
         fill_GRID();
-        for (int i = 0; i < 4*dSize*dSize + 4*dSize + 1; i++) {
-            GRID.get(i).render(gl);
+        for (Point pg: GRID) {
+            pg.render(gl);
         }
 
-        Quad q = new Quad(new Point(3, 4), new Point(5, -2), new Point(9, 7));
-        q.render(gl);
-
-        Circle c = new Circle(new Point(5, 3), new Point(6, 4));
-        c.render(gl);
-
-        p1.render(gl);
-        p.render(gl);
-
-        c.fill_listInside();
-        int size = c.pointsInside.size();
-        System.out.println(size);
     }
 }

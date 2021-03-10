@@ -139,4 +139,17 @@ public class Figures{
 
     }
 
+    public static void renderDecart(GL2 gl){
+        //нарисовать координатные оси
+        Point LEFTX = new Point(-Problem.dSize, 0),
+                RIGHTX = new Point(Problem.dSize, 0),
+                UPY = new Point(0, Problem.dSize),
+                DOWNY = new Point(0, -Problem.dSize);
+        Figures.renderLine(gl, LEFTX, RIGHTX, 2, new Color(255, 255, 255));
+        Figures.renderLine(gl, UPY, DOWNY, 2, new Color(255, 255, 255));
+        Figures.renderTriangle(gl, new Point(Problem.dSize-1, 1), new Point(Problem.dSize, 0), new Point(Problem.dSize-1, -1), new Color(255, 255, 255), true);
+        Figures.renderTriangle(gl, new Point(1, Problem.dSize-1), new Point(0, Problem.dSize), new Point(-1, Problem.dSize-1), new Color(255, 255, 255), true);
+        //нарисовать координатные оси
+    }
+
 }
