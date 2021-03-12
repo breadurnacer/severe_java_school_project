@@ -28,6 +28,11 @@ public class Problem {
     //список заданных окружностей
     public ArrayList<Circle> CirclesList = new ArrayList<Circle>();
 
+    //результативные значение и объекты
+    double maxArea = 0;
+    Circle resultCircle = null;
+    Quad resultQuad = null;
+
 
     //список всех точек на заданной плоскости (сетка)
     public static ArrayList<Point> GRID = new ArrayList<Point>();
@@ -36,7 +41,6 @@ public class Problem {
     //q - слева направо
     //accuracy - точность от 0 до 1. 1 - наихудшая точность. -> 0 - наилушая
     public static double accuracy = 0.5;
-    public static double np = 1/accuracy;
     public static void fill_GRID() {
         for (double i = dSize; i >= -dSize; i-=accuracy) {
 
@@ -52,14 +56,14 @@ public class Problem {
     public void solve() {
         fill_GRID();
 
-        //CirclesList.add(new Circle(new Point(5, 3), new Point(6, 4)));
-        CirclesList.add(new Circle(new Point(0, -6), new Point(0, -1)));
-        //CirclesList.add(new Circle(new Point(-11, -11), new Point(-11, -8)));
-        //CirclesList.add(new Circle(new Point(10, 3), new Point(0, 4)));
+        CirclesList.add(new Circle(new Point(5, 3), new Point(6, 4)));
+      //  CirclesList.add(new Circle(new Point(0, -6), new Point(0, -1)));
+       CirclesList.add(new Circle(new Point(-11, -11), new Point(-11, -8)));
+        CirclesList.add(new Circle(new Point(10, 3), new Point(0, 4)));
 
-        //QuadsList.add(new Quad(new Point(3, 4), new Point(5, -2), new Point(9, 3)));
-        QuadsList.add(new Quad(new Point(-1, -3), new Point(-3, -4), new Point(2, 7)));
-        //QuadsList.add(new Quad(new Point(-10, -11), new Point(-5, 12), new Point(-11, 6)));
+       // QuadsList.add(new Quad(new Point(3, 4), new Point(5, -2), new Point(9, 3)));
+      //  QuadsList.add(new Quad(new Point(-1, -3), new Point(-3, -4), new Point(2, 7)));
+        QuadsList.add(new Quad(new Point(-10, -11), new Point(-5, 12), new Point(-11, 6)));
 
 
 
@@ -78,6 +82,21 @@ public class Problem {
                 System.out.println(c.IntersectionArea(q));
             }
         }
+
+
+        for(Quad q : QuadsList){
+            for(Circle c : CirclesList){
+                double nowArea = c.IntersectionArea(q);
+                if(nowArea>maxArea){
+                    resultCircle = c;
+                    resultQuad = q;
+                    maxArea = nowArea;
+                }
+            }
+        }
+        System.out.println("MAX AREA " + maxArea);
+
+
 
     }
 
@@ -101,6 +120,7 @@ public class Problem {
 
 
 
+
         for (Quad q: QuadsList) {
             q.render(gl);
        }
@@ -118,8 +138,13 @@ public class Problem {
         Figures.renderDecart(gl);
 
         fill_GRID();
-        for (Point pg: GRID) {
-            pg.render(gl);
+       for (Point pg: GRID) {
+           pg.render(gl);
+        }
+
+        if(resultCircle!=null && resultQuad!=null){
+            resultCircle.render(gl, new Color(255,255,0), false);
+            resultQuad.render(gl, new Color(255,255, 0), false);
         }
 
     }

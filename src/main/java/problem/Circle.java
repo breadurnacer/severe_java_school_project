@@ -31,14 +31,14 @@ public class Circle {
     }
 
     public void fill_listInside(){
-        for (int i = 0; i < 4*dSize*dSize + 4*dSize + 1; i++) {
-            if(isInside(GRID.get(i))){
-                pointsInside.add(GRID.get(i));
+        for (Point pg : GRID) {
+            if(isInside(pg)){
+                pointsInside.add(pg);
             }
         }
     }
 
-    //метод пересечения списков точек через retainall
+    //метод пересечения списков точек через retainAll
     public int IntersectionArea(Quad quad){
         int result;
         ArrayList<Point> points = this.pointsInside;
