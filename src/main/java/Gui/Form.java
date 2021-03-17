@@ -83,7 +83,7 @@ public class Form extends JFrame {
     /**
      * Инициализация виджетов
      */
-  /*  private void initWidgets() {
+    private void initWidgets() {
         // задаём текст полю описания задачи
         problemText.setText("<html>" + Problem.PROBLEM_TEXT.replaceAll("\n", "<br>"));
         // делаем первое радио выбранным
@@ -91,6 +91,7 @@ public class Form extends JFrame {
         radioButton2.setSelected(false);
 
         addPoint.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 double x = Double.parseDouble(xPointField.getText());
@@ -99,31 +100,34 @@ public class Form extends JFrame {
             }
         });
 
-        loadFromFileBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                renderer.problem.loadFromFile();
-            }
-        });
-        saveToFileBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                renderer.problem.saveToFile();
-            }
-        });
+//        loadFromFileBtn.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                renderer.problem.loadFromFile();
+//            }
+//        });
+
+//        saveToFileBtn.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                renderer.problem.saveToFile();
+//            }
+//        });
+
         clearBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 renderer.problem.clear();
             }
         });
+
         solveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 renderer.problem.solve();
             }
         });
-    }*/
+    }
 
     /**
      * Событие таймера

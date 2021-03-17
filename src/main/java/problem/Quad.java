@@ -20,8 +20,15 @@ public class Quad {
     //список точек внутри
     ArrayList<Point> pointsInside = new ArrayList<Point>();
 
+    public void renderPointsInside(GL2 gl){
+        for (Point pIn:
+                pointsInside) {
+            pIn.render(gl, 3, new Color(0,0,255));
+        }}
 
-    Quad(Point p1, Point p2, Point pA) {
+
+
+        Quad(Point p1, Point p2, Point pA) {
         this.p1 = p1;
         this.p2 = p2;
         double d1,d2;
@@ -78,7 +85,7 @@ public class Quad {
         Figures.renderQuad(gl,p1,p2,p3,p4,color,filled);
     }
 
-    //облегчённый метод рисования
+    //облегчённый метод рисования (по умолчанию - белый цвет и не закрашен внутри)
     void render(GL2 gl){render(gl,new Color(255,255,255), false);}
 
 

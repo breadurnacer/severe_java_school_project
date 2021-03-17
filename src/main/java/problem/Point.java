@@ -53,6 +53,11 @@ public class Point implements Comparable<Line> {
         return Double.compare(point.x, x) == 0 && Double.compare(point.y, y) == 0;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
     //1 - точка выше прямой
     //0 - точка на прямой, принадлежит
     //-1 - точка ниже прямой
