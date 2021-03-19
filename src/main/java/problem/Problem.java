@@ -93,6 +93,18 @@ public class Problem {
 
     }
 
+    //добавить прямоугольник
+    public void addQuad(Point p1, Point p2, Point pP){
+        Quad newestQuad = new Quad(p1,p2,pP);
+        QuadsList.add(newestQuad);
+    }
+
+    //добавить окружность
+    public void addCircle(Point pC, Point pIn){
+        Circle newestCircle = new Circle(pC, pIn);
+        CirclesList.add(newestCircle);
+    }
+
     //Загрузить задачу из файла
     public void loadFromFile() {
 

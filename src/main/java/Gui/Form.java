@@ -14,20 +14,55 @@ public class Form extends JFrame {
     /**
      * панель для отображения OpenGL
      */
+
+    //Jпанели
     private JPanel GLPlaceholder;
     private JPanel root;
-    private JTextField xPointField;
-    private JTextField yPointField;
-    private JButton randomBtn;
-    private JTextField pointCntField;
+
+    //текста и надписи
+    private JLabel problemText;
+    private JLabel addQuadText;
+    private JLabel apex1Text;
+    private JLabel apex2Text;
+    private JLabel quadPText;
+    private JLabel addCircleText;
+    private JLabel centerText;
+    private JLabel circlePText;
+    private JLabel solveText;
+
+    //поля для ввода
+
+    //ввод "прямоугольных" точек
+    private JTextField xQuadApex1Field;
+    private JTextField xQuadApex2Field;
+    private JTextField xQuadPointField;
+    private JTextField yQuadApex1Field;
+    private JTextField yQuadApex2Field;
+    private JTextField yQuadPointField;
+    private JTextField quadCountField;
+    //ввод "прямоугольных" точек
+
+    //ввод "круговых" точек
+    private JTextField xCircleCenterField;
+    private JTextField xCirclePointField;
+    private JTextField yCircleCenterField;
+    private JTextField yCirclePointField;
+    private JTextField circleCountField;
+    //ввод "круговых" точек
+
+
+    //КНОПКИ
+    //основные
     private JButton loadFromFileBtn;
     private JButton saveToFileBtn;
     private JButton clearBtn;
     private JButton solveBtn;
-    private JLabel problemText;
-    private JButton addPoint;
-    private JRadioButton radioButton1;
-    private JRadioButton radioButton2;
+    //добавительные кнопки
+    private JButton randomQuad;
+    private JButton randomCircle;
+    private JButton addQuad;
+    private JButton addCircle;
+
     /**
      * таймер
      */
@@ -54,6 +89,9 @@ public class Form extends JFrame {
 //        // задаём размер формы
 //        setSize(d);
         // задаём размер формы
+
+
+
         setSize(getPreferredSize());
         // показываем форму
         setVisible(true);
@@ -77,7 +115,7 @@ public class Form extends JFrame {
         });
         timer.start();
         renderer.problem.solve();
-        //initWidgets();
+        initWidgets();
     }
 
     /**
@@ -86,17 +124,47 @@ public class Form extends JFrame {
     private void initWidgets() {
         // задаём текст полю описания задачи
         problemText.setText("<html>" + Problem.PROBLEM_TEXT.replaceAll("\n", "<br>"));
-        // делаем первое радио выбранным
-        radioButton1.setSelected(true);
-        radioButton2.setSelected(false);
 
-        addPoint.addActionListener(new ActionListener() {
+        //задаю текст для остальных текстов
+        addQuadText.setText("ЗАДАТЬ ПРЯМОУГОЛЬНИК");
+        apex1Text.setText("Первая вершина: ");
+        apex2Text.setText("Вторая вершина: ");
+        quadPText.setText("Точка на противоположной стороне: ");
+        addCircleText.setText("ЗАДАТЬ ОКРУЖНОСТЬ");
+        centerText.setText("Центр окружности: ");
+        circlePText.setText("Точка на окружности: ");
+        solveText.setText("Решение: ");
+
+        addQuad.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                double x = Double.parseDouble(xPointField.getText());
-                double y = Double.parseDouble(yPointField.getText());
-                // renderer.problem.addPoint(x, y);
+                double x1 = Double.parseDouble(xQuadApex1Field.getText());
+                double y1 = Double.parseDouble(yQuadApex1Field.getText());
+                double x2 = Double.parseDouble(xQuadApex2Field.getText());
+                double y2 = Double.parseDouble(yQuadApex2Field.getText());
+                double xp = Double.parseDouble(xQuadPointField.getText());
+                double yp = Double.parseDouble(yQuadPointField.getText());
+                Point
+                        Point1 = new Point(x1,y1),
+                        Point2 = new Point(x2,y2),
+                        PointP = new Point(xp,yp);
+                renderer.problem.addQuad(Point1, Point2, PointP);
+            }
+        });
+
+        addCircle.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double xc = Double.parseDouble(xCircleCenterField.getText());
+                double yc = Double.parseDouble(yCircleCenterField.getText());
+                double xp = Double.parseDouble(xCirclePointField.getText());
+                double yp = Double.parseDouble(yCirclePointField.getText());
+                Point
+                        PointC = new Point(xc,yc),
+                        PointP = new Point(xp,yp);
+                renderer.problem.addCircle(PointC, PointP);
             }
         });
 
