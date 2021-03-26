@@ -26,7 +26,16 @@ public class Quad {
             pIn.render(gl, 3, new Color(0,0,255));
         }}
 
-
+        Quad(Point p1, Point p2, Point p3, Point p4){
+            this.p1 = p1;
+            this.p2 = p2;
+            this.p3 = p3;
+            this.p4 = p4;
+            line1 = new Line(p1,p2);
+            line2 = new Line(p2,p3);
+            line3 = new Line(p3,p4);
+            line4 = new Line(p4,p1);
+        }
 
         Quad(Point p1, Point p2, Point pA) {
         this.p1 = p1;
@@ -78,6 +87,14 @@ public class Quad {
                 pointsInside.add(pg);
             }
         }
+    }
+
+    //текстовый вывод прямоугольника
+    @Override
+    public String toString() {
+        String s = String.format("(%.1f; %.1f), (%.1f; %.1f), (%.1f; %.1f), (%.1f; %.1f)",
+                p1.x,p1.y,p2.x,p2.y,p3.x,p3.y,p4.x,p4.y);
+        return s;
     }
 
     //Рисование точки через класс Figures

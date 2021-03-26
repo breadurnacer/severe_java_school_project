@@ -14,6 +14,7 @@ public class Form extends JFrame {
     /**
      * панель для отображения OpenGL
      */
+    private JFrame frame = new JFrame();
 
     //Jпанели
     private JPanel GLPlaceholder;
@@ -31,6 +32,8 @@ public class Form extends JFrame {
     private JLabel solveText;
 
     //поля для ввода
+    private JTextField dSizeField;
+    private JTextField npField;
 
     //ввод "прямоугольных" точек
     private JTextField xQuadApex1Field;
@@ -62,6 +65,10 @@ public class Form extends JFrame {
     private JButton randomCircle;
     private JButton addQuad;
     private JButton addCircle;
+    //другие кнопки
+    private JButton changeDSizeBth;
+    private JButton changeNpBth;
+    private JCheckBox checkBoxD;
 
     /**
      * таймер
@@ -116,6 +123,15 @@ public class Form extends JFrame {
         timer.start();
         renderer.problem.solve();
         initWidgets();
+        setSolveTextMethod();
+    }
+
+    public void setSolveTextMethod(){
+        if(renderer.problem.resultCircle!=null && renderer.problem.resultQuad!=null)
+            solveText.setText("<html>" + "Решение: <br>окружность с центром " + renderer.problem.resultCircle
+                    + "<br>" + " и прямоугольник с вершинами " +  renderer.problem.resultQuad);
+        else
+            solveText.setText("Решения нет");
     }
 
     /**
@@ -135,6 +151,17 @@ public class Form extends JFrame {
         circlePText.setText("Точка на окружности: ");
         solveText.setText("Решение: ");
 
+        addQuad.setText("Добавить прямоугольник");
+        addCircle.setText("Добавить окружность");
+
+        checkBoxD.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (checkBoxD.isSelected()) {
+                    renderer.problem.axis = true;
+                }else renderer.problem.axis = false;
+            }
+        });
+
         addQuad.addActionListener(new ActionListener() {
 
             @Override
@@ -153,6 +180,15 @@ public class Form extends JFrame {
             }
         });
 
+        randomQuad.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int n = (int)Double.parseDouble(quadCountField.getText());
+                renderer.problem.getRandomQuad(n);
+            }
+        });
+
         addCircle.addActionListener(new ActionListener() {
 
             @Override
@@ -168,24 +204,64 @@ public class Form extends JFrame {
             }
         });
 
-//        loadFromFileBtn.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                renderer.problem.loadFromFile();
-//            }
-//        });
+        randomCircle.addActionListener(new ActionListener() {
 
-//        saveToFileBtn.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                renderer.problem.saveToFile();
-//            }
-//        });
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int n = (int)Double.parseDouble(circleCountField.getText());
+                renderer.problem.getRandomCircle(n);
+            }
+        });
+
+        changeDSizeBth.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double newDSize = Double.parseDouble(dSizeField.getText());
+                renderer.problem.dSize = newDSize;
+                renderer.problem.fill_GRID();
+                //renderer.problem.solve();
+            }
+        });
+
+        changeNpBth.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double newNp = Double.parseDouble(npField.getText());
+                renderer.problem.np = newNp;
+                renderer.problem.fill_GRID();
+                renderer.problem.solve();
+                setSolveTextMethod();
+            }
+        });
+
+        loadFromFileBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileOpen = new JFileChooser();
+                fileOpen.showOpenDialog(frame);
+                renderer.problem.loadFromFile(fileOpen.getSelectedFile());
+                dSizeField.setText(String.valueOf(renderer.problem.dSize));
+                renderer.problem.solve();
+                setSolveTextMethod();
+            }
+        });
+
+        saveToFileBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileSave = new JFileChooser();
+                fileSave.showSaveDialog(frame);
+                renderer.problem.saveToFile(fileSave.getSelectedFile());
+            }
+        });
 
         clearBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 renderer.problem.clear();
+                setSolveTextMethod();
             }
         });
 
@@ -193,6 +269,7 @@ public class Form extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 renderer.problem.solve();
+                setSolveTextMethod();
             }
         });
     }
@@ -211,5 +288,9 @@ public class Form extends JFrame {
      */
     public static void main(String[] args) {
         new Form();
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

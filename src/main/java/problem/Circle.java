@@ -23,6 +23,11 @@ public class Circle {
         }
     }
 
+    Circle(Point p0, double R){
+        this.p0 = p0;
+        this.R = R;
+    }
+
     Circle(Point p0, Point pIn) {
         this.p0 = p0;
         this.R = p0.distanceTo(pIn);
@@ -45,12 +50,19 @@ public class Circle {
     }
 
     //метод пересечения списков точек через retainAll
-    public int intersectionArea(Quad quad) {
-        int result;
+    public ArrayList<Point> intersectionArea(Quad quad) {
+        ArrayList<Point> result;
         ArrayList<Point> points = new ArrayList<>(this.pointsInside);
         points.retainAll(quad.pointsInside);
-        result = points.size();
+        result = points;
         return result;
+    }
+
+    //тесктовый вывод окружности
+    @Override
+    public String toString() {
+        String s = String.format("(%.1f; %.1f) R = %.1f", p0.x,p0.y,R);
+        return s;
     }
 
     //Рисование точки через класс Figures

@@ -8,6 +8,8 @@ public class Line {
     public Line(Point p1, Point p2) {
         A = p1.y - p2.y;
         B = p2.x - p1.x;
+        if(B==0) B = 0.001;
+
         C = p1.x * p2.y - p2.x * p1.y;
         k = -A/B;
         b = -C/B;
@@ -16,6 +18,8 @@ public class Line {
     public Line(double a, double b, double c) {
         A = a;
         B = b;
+        if(B==0) B = 0.001;
+
         C = c;
         k = -A/B;
         b = -C/B;
