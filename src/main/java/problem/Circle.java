@@ -23,7 +23,7 @@ public class Circle {
         }
     }
 
-    Circle(Point p0, double R){
+    Circle(Point p0, double R) {
         this.p0 = p0;
         this.R = R;
     }
@@ -61,7 +61,7 @@ public class Circle {
     //тесктовый вывод окружности
     @Override
     public String toString() {
-        String s = String.format("(%.1f; %.1f) R = %.1f", p0.x,p0.y,R);
+        String s = String.format("(%.1f; %.1f) R = %.1f", p0.x, p0.y, R);
         return s;
     }
 

@@ -20,8 +20,6 @@ public class Problem {
 
     public static final String PROBLEM_CAPTION = "ИТОГОВЫЙ ПРОЕКТ УЧЕНИКА 10-7 БОРИСЕНКО НИКОЛАЯ";
 
-    private static final String FILE_NAME = "points.txt";
-
     //отрисововать ли оси
     public boolean axis = true;
 
@@ -72,7 +70,6 @@ public class Problem {
             }
 
         }
-        System.out.println("GRID SIZE " + GRID.size() + " points " + "np = " + np);
     }
 
     //Решить задачу
@@ -95,7 +92,6 @@ public class Problem {
             q.fill_listInside();
         }
 
-
         for (Quad q : QuadsList) {
             for (Circle c : CirclesList) {
                 ArrayList<Point> nowPoints = c.intersectionArea(q);
@@ -108,7 +104,6 @@ public class Problem {
                 }
             }
         }
-        System.out.println("MAX AREA " + maxArea);
     }
 
     //добавить прямоугольник
@@ -209,6 +204,7 @@ public class Problem {
             } else if (s[0].equals("CirclesList")) {
                 qBool = false;
                 cBool = true;
+            } else if (s[0].equals("Решения") || s[0].equals("Решение:")) {
             } else {
                 if (typeRead == 1) {
                     //если читается прямоугольник
@@ -238,7 +234,7 @@ public class Problem {
                         pS = pS.replace(",", ".");
                         String[] xyS = pS.split("; ");
                         pC = new Point(Double.parseDouble(xyS[0]), Double.parseDouble(xyS[1]));
-                        rC = Double.parseDouble(s[1].replace(",","."));
+                        rC = Double.parseDouble(s[1].replace(",", "."));
 
                         CirclesList.add(new Circle(pC, rC));
                     }
@@ -293,6 +289,11 @@ public class Problem {
             for (Circle c : CirclesList) {
                 s += ("\n" + c);
             }
+            if (resultCircle != null && resultQuad != null)
+                s += "\nРешение: окружность с центром " + resultCircle
+                        + " и прямоугольник с вершинами " + resultQuad;
+            else
+                s += "\nРешения нет";
 
             writer.write(s);
             writer.close();

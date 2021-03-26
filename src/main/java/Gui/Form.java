@@ -98,7 +98,6 @@ public class Form extends JFrame {
         // задаём размер формы
 
 
-
         setSize(getPreferredSize());
         // показываем форму
         setVisible(true);
@@ -126,10 +125,10 @@ public class Form extends JFrame {
         setSolveTextMethod();
     }
 
-    public void setSolveTextMethod(){
-        if(renderer.problem.resultCircle!=null && renderer.problem.resultQuad!=null)
+    public void setSolveTextMethod() {
+        if (renderer.problem.resultCircle != null && renderer.problem.resultQuad != null)
             solveText.setText("<html>" + "Решение: <br>окружность с центром " + renderer.problem.resultCircle
-                    + "<br>" + " и прямоугольник с вершинами " +  renderer.problem.resultQuad);
+                    + "<br>" + " и прямоугольник с вершинами " + renderer.problem.resultQuad);
         else
             solveText.setText("Решения нет");
     }
@@ -158,7 +157,7 @@ public class Form extends JFrame {
             public void itemStateChanged(ItemEvent e) {
                 if (checkBoxD.isSelected()) {
                     renderer.problem.axis = true;
-                }else renderer.problem.axis = false;
+                } else renderer.problem.axis = false;
             }
         });
 
@@ -173,9 +172,9 @@ public class Form extends JFrame {
                 double xp = Double.parseDouble(xQuadPointField.getText());
                 double yp = Double.parseDouble(yQuadPointField.getText());
                 Point
-                        Point1 = new Point(x1,y1),
-                        Point2 = new Point(x2,y2),
-                        PointP = new Point(xp,yp);
+                        Point1 = new Point(x1, y1),
+                        Point2 = new Point(x2, y2),
+                        PointP = new Point(xp, yp);
                 renderer.problem.addQuad(Point1, Point2, PointP);
             }
         });
@@ -184,7 +183,7 @@ public class Form extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int n = (int)Double.parseDouble(quadCountField.getText());
+                int n = (int) Double.parseDouble(quadCountField.getText());
                 renderer.problem.getRandomQuad(n);
             }
         });
@@ -198,8 +197,8 @@ public class Form extends JFrame {
                 double xp = Double.parseDouble(xCirclePointField.getText());
                 double yp = Double.parseDouble(yCirclePointField.getText());
                 Point
-                        PointC = new Point(xc,yc),
-                        PointP = new Point(xp,yp);
+                        PointC = new Point(xc, yc),
+                        PointP = new Point(xp, yp);
                 renderer.problem.addCircle(PointC, PointP);
             }
         });
@@ -208,7 +207,7 @@ public class Form extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int n = (int)Double.parseDouble(circleCountField.getText());
+                int n = (int) Double.parseDouble(circleCountField.getText());
                 renderer.problem.getRandomCircle(n);
             }
         });

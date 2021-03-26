@@ -16,8 +16,8 @@ public class Point implements Comparable<Line> {
     /**
      * Конструктор точки
      *
-     * @param x         координата
-     * @param y         координата y
+     * @param x координата х
+     * @param y координата y
      */
 
     public Point(double x, double y) {
@@ -33,11 +33,13 @@ public class Point implements Comparable<Line> {
 
     //Рисование точки через класс Figures
     void render(GL2 gl, double W, Color color) {
-        Figures.renderPoint(gl,this, W, color);
+        Figures.renderPoint(gl, this, W, color);
     }
 
     //облегчённый метод рисования
-    void render(GL2 gl){render(gl,2,new Color(255,255,255));}
+    void render(GL2 gl) {
+        render(gl, 2, new Color(255, 255, 255));
+    }
 
     //Получить строковое представление точки
     @Override
@@ -63,9 +65,9 @@ public class Point implements Comparable<Line> {
     //-1 - точка ниже прямой
     @Override
     public int compareTo(Line line) {
-        if(y>line.k*x + line.b) return 1;
-        if(y==line.k*x + line.b) return 0;
-        if(y<line.k*x + line.b) return -1;
+        if (y > line.k * x + line.b) return 1;
+        if (y == line.k * x + line.b) return 0;
+        if (y < line.k * x + line.b) return -1;
         return 0;
     }
 }

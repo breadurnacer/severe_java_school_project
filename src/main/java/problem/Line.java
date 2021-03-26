@@ -1,34 +1,34 @@
 package problem;
 
 public class Line {
-    public double k,b;
+    public double k, b;
     private double A, B, C;
 
     //представление прямой в виде Ax + By + C = 0
     public Line(Point p1, Point p2) {
         A = p1.y - p2.y;
         B = p2.x - p1.x;
-        if(B==0) B = 0.001;
+        if (B == 0) B = 0.001;
 
         C = p1.x * p2.y - p2.x * p1.y;
-        k = -A/B;
-        b = -C/B;
+        k = -A / B;
+        b = -C / B;
     }
 
     public Line(double a, double b, double c) {
         A = a;
         B = b;
-        if(B==0) B = 0.001;
+        if (B == 0) B = 0.001;
 
         C = c;
-        k = -A/B;
-        b = -C/B;
+        k = -A / B;
+        b = -C / B;
     }
 
     //представление прямой в виде y = kx+b
-    public Line (double k, double b){
-        this.k=k;
-        this.b=b;
+    public Line(double k, double b) {
+        this.k = k;
+        this.b = b;
         this.A = -k;
         this.B = 1;
         this.C = -b;
@@ -120,8 +120,8 @@ public class Line {
     }
 
     public boolean insideTreug(Point p) {
-        Line ORDINATA = new Line(new Point(0,0), new Point(0,1)),
-                ABSCISSA = new Line(new Point(0,0), new Point(1,0));
+        Line ORDINATA = new Line(new Point(0, 0), new Point(0, 1)),
+                ABSCISSA = new Line(new Point(0, 0), new Point(1, 0));
 
         double pX = intersection(ABSCISSA).x,
                 pY = intersection(ORDINATA).y;
@@ -144,7 +144,6 @@ public class Line {
         }
         return false;
     }
-
 
 
     public void normalize() {
