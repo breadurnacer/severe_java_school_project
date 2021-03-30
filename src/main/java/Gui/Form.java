@@ -240,10 +240,11 @@ public class Form extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileOpen = new JFileChooser();
                 fileOpen.showOpenDialog(frame);
+                renderer.problem.clear();
                 renderer.problem.loadFromFile(fileOpen.getSelectedFile());
                 dSizeField.setText(String.valueOf(renderer.problem.dSize));
-                renderer.problem.solve();
-                setSolveTextMethod();
+                //renderer.problem.solve();
+                //setSolveTextMethod();
             }
         });
 
