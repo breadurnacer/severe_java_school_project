@@ -1,11 +1,3 @@
-package Gui;
-
-import problem.Point;
-import problem.Problem;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
 /**
  * Класс формы приложения
